@@ -3,103 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Recursos verificados para venezolanos en el exterior tras el terremoto del 24 de junio de 2026 · Verified resources for Venezuelans abroad after the June 24 earthquake">
-<title>Venezuela Resiste · Venezuela Stands</title>
+<meta name="description" content="Recursos verificados para ayudar a Venezuela desde Madrid tras el terremoto del 24 de junio de 2026 · Verified resources to help Venezuela from Madrid after the June 24 earthquake">
+<title>Venezuela Resiste · Cómo ayudar desde Madrid</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
   :root {
-    --red:    #C0392B;
-    --gold:   #D4A017;
-    --navy:   #1A2744;
-    --white:  #FFFFFF;
-    --off:    #F7F5F0;
-    --muted:  #6B6B6B;
-    --border: #E2DDD6;
-    --radius: 10px;
-    --max:    860px;
+    --red:#C0392B; --gold:#D4A017; --navy:#1A2744; --white:#FFFFFF;
+    --off:#F7F5F0; --muted:#6B6B6B; --border:#E2DDD6; --radius:10px; --max:860px;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--off); color: var(--navy); font-size: 16px; line-height: 1.6; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off);color:var(--navy);font-size:16px;line-height:1.6}
 
   /* HEADER */
-  header { background: var(--navy); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
-  .flag-bar { display: flex; height: 5px; }
-  .flag-bar span { flex: 1; }
-  .f1 { background: var(--red); } .f2 { background: var(--gold); } .f3 { background: #2D60B5; }
-  .header-inner { max-width: var(--max); margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
-  .site-title { color: var(--white); font-size: 1.1rem; font-weight: 700; }
-  .site-title span { color: var(--gold); }
-  .lang-toggle { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-  .lang-toggle:hover { background: rgba(255,255,255,0.22); }
+  header{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+  .flag-bar{display:flex;height:5px}
+  .flag-bar span{flex:1}
+  .f1{background:var(--red)}.f2{background:var(--gold)}.f3{background:#2D60B5}
+  .header-inner{max-width:var(--max);margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+  .site-title{color:var(--white);font-size:1.1rem;font-weight:700}
+  .site-title span{color:var(--gold)}
+  .lang-toggle{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:var(--white);padding:6px 14px;border-radius:20px;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .2s}
+  .lang-toggle:hover{background:rgba(255,255,255,.22)}
 
   /* HERO */
-  .hero { background: var(--navy); padding: 44px 20px 48px; text-align: center; }
-  .hero-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-  .hero h1 { font-size: clamp(1.5rem, 4vw, 2.3rem); font-weight: 800; color: var(--white); line-height: 1.2; max-width: 620px; margin: 0 auto 14px; }
-  .hero-sub { color: rgba(255,255,255,0.6); font-size: 0.95rem; max-width: 500px; margin: 0 auto 32px; }
+  .hero{background:var(--navy);padding:44px 20px 48px;text-align:center}
+  .hero-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .hero h1{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:800;color:var(--white);line-height:1.2;max-width:620px;margin:0 auto 14px}
+  .hero-sub{color:rgba(255,255,255,.6);font-size:.95rem;max-width:500px;margin:0 auto 32px}
 
-  /* SEISMIC LIVE BLOCK */
-  .seismic-block { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; max-width: 660px; margin: 0 auto; padding: 20px 24px; }
-  .seismic-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
-  .seismic-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-  .live-pill { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: rgba(255,255,255,0.45); }
-  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #4CAF50; animation: pulse 1.8s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  /* SEISMIC */
+  .seismic-block{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;max-width:660px;margin:0 auto;padding:20px 24px}
+  .seismic-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+  .seismic-title{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .live-pill{display:flex;align-items:center;gap:5px;font-size:.7rem;color:rgba(255,255,255,.45)}
+  .live-dot{width:6px;height:6px;border-radius:50%;background:#4CAF50;animation:pulse 1.8s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .quake-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+  .quake-stat{text-align:center}
+  .quake-num{display:block;font-size:2rem;font-weight:800;color:var(--gold);line-height:1}
+  .quake-num.loading{font-size:1rem;color:rgba(255,255,255,.3);animation:blink 1.2s infinite}
+  @keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+  .quake-label{font-size:.72rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;display:block}
+  .recent-quakes{margin-top:18px;border-top:1px solid rgba(255,255,255,.1);padding-top:14px}
+  .recent-title{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px}
+  .quake-list{display:flex;flex-direction:column;gap:6px}
+  .quake-item{display:flex;align-items:center;gap:10px;font-size:.82rem;color:rgba(255,255,255,.7)}
+  .quake-mag{font-weight:700;font-size:.9rem;min-width:36px}
+  .mag-major{color:#FF6B6B}.mag-strong{color:#FFB347}.mag-moderate{color:#FFD700}.mag-minor{color:rgba(255,255,255,.5)}
+  .quake-place{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quake-time{font-size:.72rem;color:rgba(255,255,255,.35);white-space:nowrap}
+  .quake-error{color:rgba(255,100,100,.7);font-size:.82rem;text-align:center;padding:8px 0}
 
-  .quake-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
-  .quake-stat { text-align: center; }
-  .quake-num { display: block; font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1; }
-  .quake-num.loading { font-size: 1rem; color: rgba(255,255,255,0.3); animation: blink 1.2s infinite; }
-  @keyframes blink { 0%,100%{opacity:0.3} 50%{opacity:1} }
-  .quake-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; display: block; }
-
-  .recent-quakes { margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; }
-  .recent-title { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
-  .quake-list { display: flex; flex-direction: column; gap: 6px; }
-  .quake-item { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: rgba(255,255,255,0.7); }
-  .quake-mag { font-weight: 700; font-size: 0.9rem; min-width: 36px; }
-  .mag-major  { color: #FF6B6B; }
-  .mag-strong { color: #FFB347; }
-  .mag-moderate { color: #FFD700; }
-  .mag-minor  { color: rgba(255,255,255,0.5); }
-  .quake-place { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .quake-time { font-size: 0.72rem; color: rgba(255,255,255,0.35); white-space: nowrap; }
-  .quake-error { color: rgba(255,100,100,0.7); font-size: 0.82rem; text-align: center; padding: 8px 0; }
+  /* TELEGRAM CTA */
+  .tg-btn{display:inline-flex;align-items:center;gap:10px;background:#229ED9;color:#fff;font-weight:700;font-size:.95rem;padding:13px 24px;border-radius:28px;text-decoration:none;transition:background .2s}
+  .tg-btn:hover{background:#1a8cbe}
+  .tg-sub{margin-top:10px;font-size:.75rem;color:rgba(255,255,255,.4)}
 
   /* MAIN */
-  main { max-width: var(--max); margin: 0 auto; padding: 40px 20px 60px; }
+  main{max-width:var(--max);margin:0 auto;padding:40px 20px 60px}
+  .alert{background:#FDF3F2;border:1.5px solid #E8A09A;border-radius:var(--radius);padding:16px 20px;margin-bottom:36px;display:flex;gap:12px;align-items:flex-start}
+  .alert-icon{font-size:1.2rem;flex-shrink:0}
+  .alert-text{font-size:.88rem;color:#7A3B1E;line-height:1.5}
+  .alert-text strong{display:block;margin-bottom:3px}
+  .section{margin-bottom:44px}
+  .section-label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .section-title{font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px;transition:box-shadow .18s,transform .18s;position:relative}
+  .card:hover{box-shadow:0 4px 18px rgba(0,0,0,.1);transform:translateY(-2px)}
+  .card-badge{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-bottom:4px;width:fit-content}
+  .badge-v{background:#E6F4EC;color:#1E7A4A}.badge-u{background:#FDE8E8;color:#B22222}.badge-i{background:#EAF1FB;color:#1A4A8A}
+  .card-title{font-size:.96rem;font-weight:700;color:var(--navy);line-height:1.3}
+  .card-desc{font-size:.84rem;color:var(--muted);line-height:1.5;flex:1}
+  .card-url{font-size:.74rem;color:#2D60B5;margin-top:4px}
+  .card-arrow{position:absolute;top:18px;right:16px;color:var(--border);transition:color .15s}
+  .card:hover .card-arrow{color:var(--navy)}
+  .tips-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px}
+  .tips-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .tips-list li{display:flex;gap:12px;align-items:flex-start;font-size:.88rem;color:#3A3A3A;line-height:1.55}
+  .tip-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--navy);margin-top:1px}
 
-  .alert { background: #FDF3F2; border: 1.5px solid #E8A09A; border-radius: var(--radius); padding: 16px 20px; margin-bottom: 36px; display: flex; gap: 12px; align-items: flex-start; }
-  .alert-icon { font-size: 1.2rem; flex-shrink: 0; }
-  .alert-text { font-size: 0.88rem; color: #7A3B1E; line-height: 1.5; }
-  .alert-text strong { display: block; margin-bottom: 3px; }
+  /* MAP */
+  #map{height:480px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:16px;z-index:1}
+  .map-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .map-filter{border:none;padding:6px 14px;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s}
+  .map-filter.all{background:var(--navy);color:var(--white)}
+  .map-filter.food{background:#E6F4EC;color:#1E7A4A}
+  .map-filter.medical{background:#FDE8E8;color:#B22222}
+  .map-filter.general{background:#EAF1FB;color:#1A4A8A}
+  .map-filter.active{outline:2px solid var(--navy);outline-offset:2px}
+  .map-count{font-size:.78rem;color:var(--muted);margin-bottom:10px}
 
-  .section { margin-bottom: 44px; }
-  .section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .section-title { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+  /* BIZUM BOX */
+  .bizum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+  .bizum-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+  .bizum-num{font-size:1.6rem;font-weight:800;color:var(--navy);letter-spacing:.05em}
+  .bizum-org{font-size:.8rem;color:var(--muted);margin-top:4px}
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
-  .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; transition: box-shadow 0.18s, transform 0.18s; position: relative; }
-  .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.10); transform: translateY(-2px); }
-  .card-badge { display: inline-block; font-size: 0.67rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; margin-bottom: 4px; width: fit-content; }
-  .badge-v { background: #E6F4EC; color: #1E7A4A; }
-  .badge-u { background: #FDE8E8; color: #B22222; }
-  .badge-i { background: #EAF1FB; color: #1A4A8A; }
-  .card-title { font-size: 0.96rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
-  .card-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.5; flex: 1; }
-  .card-url { font-size: 0.74rem; color: #2D60B5; margin-top: 4px; }
-  .card-arrow { position: absolute; top: 18px; right: 16px; color: var(--border); transition: color 0.15s; }
-  .card:hover .card-arrow { color: var(--navy); }
+  /* IBAN BOX */
+  .iban-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:14px}
+  .iban-title{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:12px}
+  .iban-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.84rem}
+  .iban-row:last-child{border-bottom:none}
+  .iban-bank{font-weight:700;min-width:80px;color:var(--navy)}
+  .iban-num{font-family:monospace;font-size:.8rem;color:var(--muted);flex:1}
+  .iban-copy{border:none;background:var(--off);border-radius:4px;padding:3px 8px;font-size:.72rem;cursor:pointer;color:var(--navy);transition:background .15s}
+  .iban-copy:hover{background:var(--border)}
 
-  .tips-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
-  .tips-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .tips-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.88rem; color: #3A3A3A; line-height: 1.55; }
-  .tip-num { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--off); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--navy); margin-top: 1px; }
+  /* FORM */
+  .contact-form{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .form-group{margin-bottom:16px}
+  .form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+  .form-group input,.form-group textarea,.form-group select{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:.9rem;font-family:inherit;color:var(--navy);background:var(--off);transition:border .15s}
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:#2D60B5}
+  .form-group textarea{resize:vertical;min-height:90px}
+  .form-submit{background:var(--navy);color:var(--white);border:none;border-radius:8px;padding:12px 28px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s;width:100%}
+  .form-submit:hover{background:#253660}
+  .form-note{font-size:.75rem;color:var(--muted);margin-top:10px;text-align:center}
 
-  footer { text-align: center; padding: 28px 20px; font-size: 0.77rem; color: var(--muted); border-top: 1px solid var(--border); max-width: var(--max); margin: 0 auto; }
-  footer a { color: var(--muted); }
+  footer{text-align:center;padding:28px 20px;font-size:.77rem;color:var(--muted);border-top:1px solid var(--border);max-width:var(--max);margin:0 auto}
+  footer a{color:var(--muted)}
 
-  @media (prefers-reduced-motion: reduce) { .live-dot, .quake-num.loading { animation: none; } .card { transition: none; } }
-  @media (max-width: 500px) { main { padding: 24px 14px 48px; } .seismic-block { padding: 16px; } }
+  @media(prefers-reduced-motion:reduce){.live-dot,.quake-num.loading{animation:none}.card{transition:none}}
+  @media(max-width:500px){main{padding:24px 14px 48px}.seismic-block{padding:16px}}
 </style>
 </head>
 <body>
@@ -117,51 +143,30 @@
   <h1 data-es="Cómo ayudar a Venezuela desde Madrid — recursos verificados" data-en="How to help Venezuela from Madrid — verified resources">Cómo ayudar a Venezuela desde Madrid — recursos verificados</h1>
   <p class="hero-sub" data-es="Venezolano o no, si estás en Madrid o en el exterior: formas reales y verificadas de ayudar." data-en="Venezuelan or not, based in Madrid or abroad — real, verified ways to help.">Venezolano o no, si estás en Madrid o en el exterior: formas reales y verificadas de ayudar.</p>
 
-  <!-- SEISMIC LIVE BLOCK -->
   <div class="seismic-block">
     <div class="seismic-header">
       <span class="seismic-title" data-es="Actividad sísmica · USGS en vivo" data-en="Seismic activity · USGS live">Actividad sísmica · USGS en vivo</span>
       <span class="live-pill"><span class="live-dot"></span><span data-es="Actualizando…" data-en="Updating…">Actualizando…</span></span>
     </div>
     <div class="quake-grid">
-      <div class="quake-stat">
-        <span class="quake-num loading" id="stat-total">—</span>
-        <span class="quake-label" data-es="sismos desde el 24 jun" data-en="quakes since Jun 24">sismos desde el 24 jun</span>
-      </div>
-      <div class="quake-stat">
-        <span class="quake-num loading" id="stat-m5">—</span>
-        <span class="quake-label" data-es="de magnitud ≥ 5.0" data-en="magnitude ≥ 5.0">de magnitud ≥ 5.0</span>
-      </div>
-      <div class="quake-stat">
-        <span class="quake-num loading" id="stat-max">—</span>
-        <span class="quake-label" data-es="magnitud máxima" data-en="max magnitude">magnitud máxima</span>
-      </div>
-      <div class="quake-stat">
-        <span class="quake-num loading" id="stat-last">—</span>
-        <span class="quake-label" data-es="última réplica" data-en="latest aftershock">última réplica</span>
-      </div>
+      <div class="quake-stat"><span class="quake-num loading" id="stat-total">—</span><span class="quake-label" data-es="sismos desde el 24 jun" data-en="quakes since Jun 24">sismos desde el 24 jun</span></div>
+      <div class="quake-stat"><span class="quake-num loading" id="stat-m5">—</span><span class="quake-label" data-es="de magnitud ≥ 5.0" data-en="magnitude ≥ 5.0">de magnitud ≥ 5.0</span></div>
+      <div class="quake-stat"><span class="quake-num loading" id="stat-max">—</span><span class="quake-label" data-es="magnitud máxima" data-en="max magnitude">magnitud máxima</span></div>
+      <div class="quake-stat"><span class="quake-num loading" id="stat-last">—</span><span class="quake-label" data-es="última réplica" data-en="latest aftershock">última réplica</span></div>
     </div>
     <div class="recent-quakes">
       <p class="recent-title" data-es="Últimas réplicas" data-en="Recent aftershocks">Últimas réplicas</p>
-      <div class="quake-list" id="quake-list">
-        <div class="quake-item"><span style="color:rgba(255,255,255,0.3);font-size:0.82rem" data-es="Cargando datos sísmicos…" data-en="Loading seismic data…">Cargando datos sísmicos…</span></div>
-      </div>
+      <div class="quake-list" id="quake-list"><div class="quake-item"><span style="color:rgba(255,255,255,.3);font-size:.82rem" data-es="Cargando datos sísmicos…" data-en="Loading seismic data…">Cargando datos sísmicos…</span></div></div>
     </div>
   </div>
 
-  <!-- TELEGRAM CTA -->
   <div style="margin-top:28px">
-    <a href="https://t.me/VenezuelaAvisos" target="_blank" rel="noopener"
-       style="display:inline-flex;align-items:center;gap:10px;background:#229ED9;color:#fff;font-weight:700;font-size:0.95rem;padding:13px 24px;border-radius:28px;text-decoration:none;transition:background 0.2s"
-       onmouseover="this.style.background='#1a8cbe'" onmouseout="this.style.background='#229ED9'">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
-      </svg>
+    <a href="https://t.me/VenezuelaAvisos" target="_blank" rel="noopener" class="tg-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       <span data-es="Recibir alertas de réplicas" data-en="Get aftershock alerts">Recibir alertas de réplicas</span>
     </a>
-    <p style="margin-top:10px;font-size:0.75rem;color:rgba(255,255,255,0.4)" data-es="Canal de Telegram · @VenezuelaAvisos · gratuito, sin registro" data-en="Telegram channel · @VenezuelaAvisos · free, no sign-up needed">Canal de Telegram · @VenezuelaAvisos · gratuito, sin registro</p>
+    <p class="tg-sub" data-es="Canal de Telegram · @VenezuelaAvisos · gratuito, sin registro" data-en="Telegram channel · @VenezuelaAvisos · free, no sign-up needed">Canal de Telegram · @VenezuelaAvisos · gratuito, sin registro</p>
   </div>
-
 </section>
 
 <main>
@@ -173,35 +178,81 @@
     </div>
   </div>
 
+  <!-- MAPA DE PUNTOS DE RECOGIDA -->
+  <div class="section">
+    <p class="section-label" data-es="Si estás en Madrid" data-en="If you're in Madrid">Si estás en Madrid</p>
+    <h2 class="section-title" data-es="🗺️ Mapa de puntos de recogida" data-en="🗺️ Collection points map">🗺️ Mapa de puntos de recogida</h2>
+    <div class="tips-box" style="margin-bottom:14px;padding:14px 18px">
+      <p style="font-size:.85rem;color:#3A3A3A;line-height:1.6" data-es="Se aceptan: alimentos no perecederos, agua, leche infantil, pañales, medicamentos sin receta, higiene personal, mantas y material de rescate. No se aceptan medicamentos abiertos o vencidos, ni alimentos perecederos." data-en="Accepted: non-perishable food, water, baby formula, diapers, OTC medication, hygiene products, blankets, rescue tools. Not accepted: opened/expired medication or perishable food.">Se aceptan: alimentos no perecederos, agua, leche infantil, pañales, medicamentos sin receta, higiene personal, mantas y material de rescate. No se aceptan medicamentos abiertos o vencidos, ni alimentos perecederos.</p>
+    </div>
+    <div class="map-filters">
+      <button class="map-filter all active" onclick="filterMap('all')" data-es="Todos" data-en="All">Todos</button>
+      <button class="map-filter food" onclick="filterMap('food')" data-es="🥫 Alimentos" data-en="🥫 Food">🥫 Alimentos</button>
+      <button class="map-filter medical" onclick="filterMap('medical')" data-es="💊 Médico" data-en="💊 Medical">💊 Médico</button>
+      <button class="map-filter general" onclick="filterMap('general')" data-es="📦 General" data-en="📦 General">📦 General</button>
+    </div>
+    <p class="map-count" id="map-count">Cargando puntos…</p>
+    <div id="map"></div>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:8px" data-es="Haz clic en cada marcador para ver dirección y horario. ¿Conoces un punto que falta? Escríbenos abajo." data-en="Click each marker for address and hours. Know a missing point? Write to us below.">Haz clic en cada marcador para ver dirección y horario. ¿Conoces un punto que falta? Escríbenos abajo.</p>
+  </div>
+
+  <!-- BIZUM Y DONACIONES RÁPIDAS -->
+  <div class="section">
+    <p class="section-label" data-es="Donación rápida" data-en="Quick donation">Donación rápida</p>
+    <h2 class="section-title" data-es="💳 Dona por Bizum desde España" data-en="💳 Donate via Bizum from Spain">💳 Dona por Bizum desde España</h2>
+    <div class="bizum-grid">
+      <div class="bizum-card">
+        <div class="bizum-num">11976</div>
+        <div class="bizum-org"><strong>Meals4Hope</strong><br><span style="font-size:.75rem">Comida para quienes más lo necesitan</span></div>
+      </div>
+      <div class="bizum-card">
+        <div class="bizum-num">03843</div>
+        <div class="bizum-org"><strong>World Central Kitchen</strong><br><span style="font-size:.75rem">Chef José Andrés · comida caliente</span></div>
+      </div>
+      <div class="bizum-card">
+        <div class="bizum-num">13132</div>
+        <div class="bizum-org"><strong>Save the Children</strong><br><span style="font-size:.75rem">Concepto: «TERREMOTO VENEZUELA»</span></div>
+      </div>
+      <div class="bizum-card">
+        <div class="bizum-num">33512</div>
+        <div class="bizum-org"><strong>Cruz Roja Española</strong><br><span style="font-size:.75rem">o SMS «VENEZUELA» al 38092 → 6€</span></div>
+      </div>
+    </div>
+
+    <div class="iban-box">
+      <p class="iban-title">🏦 <span data-es="Cáritas Venezuela · Transferencia bancaria (indica «Terremoto Venezuela»)" data-en="Cáritas Venezuela · Bank transfer (reference: «Terremoto Venezuela»)">Cáritas Venezuela · Transferencia bancaria (indica «Terremoto Venezuela»)</span></p>
+      <div class="iban-row"><span class="iban-bank">Santander</span><span class="iban-num">ES23 0049 1892 6927 1329 3362</span><button class="iban-copy" onclick="copyIBAN(this,'ES2300491892692713293362')">Copiar</button></div>
+      <div class="iban-row"><span class="iban-bank">CaixaBank</span><span class="iban-num">ES89 2100 5731 7102 0022 7540</span><button class="iban-copy" onclick="copyIBAN(this,'ES8921005731710200227540')">Copiar</button></div>
+      <div class="iban-row"><span class="iban-bank">BBVA</span><span class="iban-num">ES95 0182 2370 4402 0170 2710</span><button class="iban-copy" onclick="copyIBAN(this,'ES9501822370440201702710')">Copiar</button></div>
+      <div class="iban-row"><span class="iban-bank">Sabadell</span><span class="iban-num">ES87 0081 5240 0300 0349 2752</span><button class="iban-copy" onclick="copyIBAN(this,'ES8700815240030003492752')">Copiar</button></div>
+    </div>
+  </div>
+
   <!-- BUSCAR PERSONAS -->
   <div class="section">
     <p class="section-label" data-es="Paso 1" data-en="Step 1">Paso 1</p>
     <h2 class="section-title" data-es="🔎 Buscar a alguien" data-en="🔎 Find someone">🔎 Buscar a alguien</h2>
     <div class="cards">
       <a class="card" href="https://venezuelareporta.org" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verificado</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verificado</span>
         <span class="card-title">Venezuela Reporta</span>
         <span class="card-desc" data-es="Base de datos con más de 21.000 reportes. Busca por nombre o cédula, sin registro." data-en="Database with 21,000+ reports. Search by name or ID, no registration needed.">Base de datos con más de 21.000 reportes. Busca por nombre o cédula, sin registro.</span>
         <span class="card-url">venezuelareporta.org</span>
       </a>
       <a class="card" href="https://sismovenezuela.org" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verificado</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verificado</span>
         <span class="card-title">Sismo Venezuela</span>
         <span class="card-desc" data-es="Mapa colaborativo de edificios dañados con buscador de personas por zona." data-en="Collaborative map of damaged buildings with person search by area.">Mapa colaborativo de edificios dañados con buscador de personas por zona.</span>
         <span class="card-url">sismovenezuela.org</span>
       </a>
       <a class="card" href="https://www.facebook.com/safety/check-in/" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-i" data-es="Red social" data-en="Social">Red social</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-i" data-es="Red social" data-en="Social">Red social</span>
         <span class="card-title">Facebook Safety Check</span>
         <span class="card-desc" data-es="Muchos venezolanos se marcaron a salvo aquí. Busca por nombre." data-en="Many Venezuelans marked themselves safe here. Search by name.">Muchos venezolanos se marcaron a salvo aquí. Busca por nombre.</span>
         <span class="card-url">facebook.com/safety</span>
       </a>
       <a class="card" href="https://www.icrc.org/es/restablecer-contacto" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-i" data-es="Cruz Roja" data-en="Red Cross">Cruz Roja</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-i" data-es="Cruz Roja" data-en="Red Cross">Cruz Roja</span>
         <span class="card-title" data-es="Restablecimiento de Contacto · CICR" data-en="Family Tracing · ICRC">Restablecimiento de Contacto · CICR</span>
         <span class="card-desc" data-es="Servicio oficial para reencontrar familiares en zonas sin comunicación." data-en="Official service to reconnect with family in areas without communication.">Servicio oficial para reencontrar familiares en zonas sin comunicación.</span>
         <span class="card-url">icrc.org</span>
@@ -215,114 +266,41 @@
     <h2 class="section-title" data-es="💚 Donar de forma segura" data-en="💚 Donate safely">💚 Donar de forma segura</h2>
     <div class="cards">
       <a class="card" href="https://www.globalgiving.org/projects/venezuela-earthquake-relief/" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
         <span class="card-title">GlobalGiving · Venezuela Relief</span>
         <span class="card-desc" data-es="Canaliza donaciones a organizaciones locales verificadas: agua, alimentos, refugio y atención médica." data-en="Channels donations to verified local organizations: water, food, shelter, and medical care.">Canaliza donaciones a organizaciones locales verificadas: agua, alimentos, refugio y atención médica.</span>
         <span class="card-url">globalgiving.org</span>
       </a>
       <a class="card" href="https://www.msf.org/venezuela" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
         <span class="card-title">Médicos Sin Fronteras</span>
         <span class="card-desc" data-es="Coordinación médica activa en Venezuela desde el primer día." data-en="Active medical coordination in Venezuela from day one.">Coordinación médica activa en Venezuela desde el primer día.</span>
         <span class="card-url">msf.org/venezuela</span>
       </a>
-      <a class="card" href="https://www.caritas.org.ve" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">Cáritas Venezuela</span>
-        <span class="card-desc" data-es="Presencia local en zonas afectadas. Acepta donaciones internacionales." data-en="Local presence in affected areas. Accepts international donations.">Presencia local en zonas afectadas. Acepta donaciones internacionales.</span>
-        <span class="card-url">caritas.org.ve</span>
+      <a class="card" href="https://www.unicef.es" target="_blank" rel="noopener">
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
+        <span class="card-title">UNICEF España</span>
+        <span class="card-desc" data-es="Protección y atención urgente a niños y familias afectadas." data-en="Urgent protection and care for affected children and families.">Protección y atención urgente a niños y familias afectadas.</span>
+        <span class="card-url">unicef.es</span>
       </a>
       <a class="card" href="https://wck.org/relief/venezuela" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
         <span class="card-title">World Central Kitchen</span>
         <span class="card-desc" data-es="Distribución de comidas en emergencias. Respuesta rápida en catástrofes." data-en="Meal distribution in emergencies. Fast disaster response.">Distribución de comidas en emergencias. Respuesta rápida en catástrofes.</span>
         <span class="card-url">wck.org</span>
       </a>
-    </div>
-  </div>
-
-  <!-- VOLUNTARIADO -->
-  <div class="section">
-    <p class="section-label" data-es="Paso 3" data-en="Step 3">Paso 3</p>
-    <h2 class="section-title" data-es="🤝 Ayudar desde donde estás" data-en="🤝 Help from where you are">🤝 Ayudar desde donde estás</h2>
-    <div class="cards">
-      <a class="card" href="https://rescate-ve.vercel.app" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-u" data-es="Urgente" data-en="Urgent">Urgente</span>
-        <span class="card-title">Rescate VE · Logística</span>
-        <span class="card-desc" data-es="Coordinan traslados desde el exterior. Contáctalos si puedes ayudar con transporte o alojamiento." data-en="Coordinating transport from abroad. Contact them if you can help with transport or housing.">Coordinan traslados desde el exterior. Contáctalos si puedes ayudar con transporte o alojamiento.</span>
-        <span class="card-url">rescate-ve.vercel.app</span>
+      <a class="card" href="https://aldeasinfantiles.es" target="_blank" rel="noopener">
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
+        <span class="card-title">Aldeas Infantiles SOS</span>
+        <span class="card-desc" data-es="Apoyo integral a la infancia y familias en situación de vulnerabilidad." data-en="Comprehensive support for children and vulnerable families.">Apoyo integral a la infancia y familias en situación de vulnerabilidad.</span>
+        <span class="card-url">aldeasinfantiles.es</span>
       </a>
-      <a class="card" href="https://venezuelareporta.org" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-i" data-es="Remoto" data-en="Remote">Remoto</span>
-        <span class="card-title" data-es="Depurar duplicados · Venezuela Reporta" data-en="Deduplicate reports · Venezuela Reporta">Depurar duplicados · Venezuela Reporta</span>
-        <span class="card-desc" data-es="Desde cualquier teléfono puedes unir fichas repetidas en la base de datos. Tarea crítica que se hace remotamente." data-en="From any phone you can merge duplicate records in the database. Critical task done remotely.">Desde cualquier teléfono puedes unir fichas repetidas en la base de datos. Tarea crítica que se hace remotamente.</span>
-        <span class="card-url">venezuelareporta.org</span>
+      <a class="card" href="https://welove.foundation" target="_blank" rel="noopener">
+        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
+        <span class="card-title">We Love Foundation</span>
+        <span class="card-desc" data-es="Fundación sin ánimo de lucro que canaliza recursos a causas humanitarias en Venezuela." data-en="Non-profit foundation channeling resources to humanitarian causes in Venezuela.">Fundación sin ánimo de lucro que canaliza recursos a causas humanitarias en Venezuela.</span>
+        <span class="card-url">welove.foundation</span>
       </a>
-      <a class="card" href="https://recursos-venezuela.netlify.app" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-i" data-es="Directorio" data-en="Directory">Directorio</span>
-        <span class="card-title" data-es="Directorio completo de recursos" data-en="Full resource directory">Directorio completo de recursos</span>
-        <span class="card-desc" data-es="Todas las iniciativas activas: mapas, búsqueda, hospitales, acopio y donaciones." data-en="All active initiatives: maps, search, hospitals, collection points and donations.">Todas las iniciativas activas: mapas, búsqueda, hospitales, acopio y donaciones.</span>
-        <span class="card-url">recursos-venezuela.netlify.app</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- PUNTOS DE RECOGIDA MADRID -->
-  <div class="section">
-    <p class="section-label" data-es="Si estás en Madrid" data-en="If you're in Madrid">Si estás en Madrid</p>
-    <h2 class="section-title" data-es="📦 Puntos de recogida en Madrid" data-en="📦 Collection points in Madrid">📦 Puntos de recogida en Madrid</h2>
-    <div class="tips-box" style="margin-bottom:16px">
-      <p style="font-size:0.88rem;color:#3A3A3A;line-height:1.6" data-es="Se aceptan: alimentos no perecederos, agua, leche infantil, pañales, medicamentos sin receta, higiene personal, mantas y material de rescate (guantes, cascos, linternas). No se aceptan alimentos perecederos ni ropa en mal estado." data-en="Accepted: non-perishable food, water, baby formula, diapers, over-the-counter medication, personal hygiene, blankets, and rescue tools. Not accepted: perishable food or worn-out clothing.">Se aceptan: alimentos no perecederos, agua, leche infantil, pañales, medicamentos sin receta, higiene personal, mantas y material de rescate (guantes, cascos, linternas). No se aceptan alimentos perecederos ni ropa en mal estado.</p>
-    </div>
-    <div class="cards">
-      <a class="card" href="https://maps.google.com/?q=Sambil+Madrid+Av+Burgos+67" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-u" data-es="Hoy 10–18:30 h" data-en="Today 10–18:30">Hoy 10–18:30 h</span>
-        <span class="card-title">Sambil Madrid · Planta 0</span>
-        <span class="card-desc" data-es="Plataforma Apoyando a Venezuela. Sáb 27 y dom 28 jun. La ayuda se envía vía Toneladas de Alegría y Fundación Bandazul." data-en="Plataforma Apoyando a Venezuela. Sat 27 & Sun 28 Jun. Aid sent via Toneladas de Alegría and Fundación Bandazul.">Plataforma Apoyando a Venezuela. Sáb 27 y dom 28 jun. La ayuda se envía vía Toneladas de Alegría y Fundación Bandazul.</span>
-        <span class="card-url">Av. de Burgos, 67 · Madrid</span>
-      </a>
-      <a class="card" href="https://maps.google.com/?q=Calle+Matilde+Landa+26+Madrid" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-u" data-es="Hoy 11–18:00 h" data-en="Today 11–18:00">Hoy 11–18:00 h</span>
-        <span class="card-title">Refugiados Sin Fronteras · Diáspora en Movimiento</span>
-        <span class="card-desc" data-es="Recogida de material humanitario. Sáb 27 y dom 28 jun, 11:00–18:00 h." data-en="Humanitarian material collection. Sat 27 & Sun 28 Jun, 11:00–18:00.">Recogida de material humanitario. Sáb 27 y dom 28 jun, 11:00–18:00 h.</span>
-        <span class="card-url">C/ Matilde Landa, 26 · Madrid</span>
-      </a>
-      <a class="card" href="https://maps.google.com/?q=Parroquia+Santa+Elena+Chamberi+Madrid" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verificado</span>
-        <span class="card-title">Parroquia Santa Elena · Chamberí</span>
-        <span class="card-desc" data-es="Alimentos, medicamentos y material sanitario. Coordinada con Fundación Talento 58. Consulta horarios en la parroquia." data-en="Food, medication, and medical supplies. Coordinated with Fundación Talento 58. Check hours at the parish.">Alimentos, medicamentos y material sanitario. Coordinada con Fundación Talento 58. Consulta horarios en la parroquia.</span>
-        <span class="card-url">Chamberí · Madrid</span>
-      </a>
-      <a class="card" href="https://maps.google.com/?q=Avenida+de+Madrid+4+Villanueva+del+Pardillo" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span>
-        <span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">VENESP · Pardillo Center</span>
-        <span class="card-desc" data-es="Asociación Civil de Venezolanos en España. Acepta productos básicos y aportaciones económicas para logística y transporte." data-en="Civil Association of Venezuelans in Spain. Accepts basic goods and monetary contributions for logistics and transport.">Asociación Civil de Venezolanos en España. Acepta productos básicos y aportaciones económicas para logística y transporte.</span>
-        <span class="card-url">Av. de Madrid, 4 local 1 · Villanueva del Pardillo</span>
-      </a>
-    </div>
-    <div class="tips-box" style="margin-top:16px">
-      <p style="font-size:0.8rem;font-weight:700;color:var(--navy);margin-bottom:10px" data-es="💳 Donación rápida por Bizum" data-en="💳 Quick donation via Bizum">💳 Donación rápida por Bizum</p>
-      <ul class="tips-list">
-        <li>
-          <span class="tip-num" style="background:#E8F4FD;color:#1A4A8A;font-size:0.72rem;font-weight:700;border-radius:4px">BZ</span>
-          <span><strong>Cruz Roja Española</strong> · Bizum <strong>33512</strong> · <span data-es="o SMS «VENEZUELA» al 38092 → 6€ íntegros" data-en="or SMS «VENEZUELA» to 38092 → €6 donated">o SMS «VENEZUELA» al 38092 → 6€ íntegros</span></span>
-        </li>
-        <li>
-          <span class="tip-num" style="background:#E8F4FD;color:#1A4A8A;font-size:0.72rem;font-weight:700;border-radius:4px">BZ</span>
-          <span><strong>World Central Kitchen</strong> · Bizum <strong>03843</strong> · <span data-es="Fundación del chef José Andrés" data-en="Chef José Andrés' foundation">Fundación del chef José Andrés</span></span>
-        </li>
-      </ul>
     </div>
   </div>
 
@@ -332,7 +310,7 @@
     <h2 class="section-title" data-es="🛡️ Cómo verificar antes de dar" data-en="🛡️ How to verify before giving">🛡️ Cómo verificar antes de dar</h2>
     <div class="tips-box">
       <ul class="tips-list">
-        <li><span class="tip-num">1</span><span data-es="Busca la organización en Charity Navigator o BBB Give.org. Si no aparece, desconfía." data-en="Look up the organization on Charity Navigator or BBB Give.org. If it's not listed, be cautious.">Busca la organización en Charity Navigator o BBB Give.org. Si no aparece, desconfía.</span></li>
+        <li><span class="tip-num">1</span><span data-es="Busca la organización en Donaseguro.com, plataforma independiente que analiza la transparencia de las ONGs." data-en="Look up the organization on Donaseguro.com, an independent platform that analyzes NGO transparency.">Busca la organización en Donaseguro.com, plataforma independiente que analiza la transparencia de las ONGs.</span></li>
         <li><span class="tip-num">2</span><span data-es="Lee el nombre completo. Las estafas copian nombres reales con cambios mínimos (una letra, un punto)." data-en="Read the full name carefully. Scams copy real names with minimal changes (one letter, a period).">Lee el nombre completo. Las estafas copian nombres reales con cambios mínimos (una letra, un punto).</span></li>
         <li><span class="tip-num">3</span><span data-es="Nunca des datos bancarios por llamadas o correos que no pediste." data-en="Never share banking details through unsolicited calls or emails.">Nunca des datos bancarios por llamadas o correos que no pediste.</span></li>
         <li><span class="tip-num">4</span><span data-es="Si mandas remesas, haz una transferencia pequeña primero y confirma la identidad del receptor." data-en="If sending remittances, do a small test transfer first and confirm the recipient's identity.">Si mandas remesas, haz una transferencia pequeña primero y confirma la identidad del receptor.</span></li>
@@ -340,106 +318,220 @@
       </ul>
     </div>
   </div>
+
+  <!-- FORMULARIO -->
+  <div class="section">
+    <p class="section-label" data-es="Colabora" data-en="Collaborate">Colabora</p>
+    <h2 class="section-title" data-es="📬 ¿Conoces un punto de recogida que falta?" data-en="📬 Know a collection point we're missing?">📬 ¿Conoces un punto de recogida que falta?</h2>
+    <div class="contact-form">
+      <form name="puntos-recogida" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="puntos-recogida"/>
+        <p style="display:none"><input name="bot-field"/></p>
+        <div class="form-group">
+          <label for="nombre" data-es="Tu nombre" data-en="Your name">Tu nombre</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"/>
+        </div>
+        <div class="form-group">
+          <label for="email" data-es="Tu email" data-en="Your email">Tu email</label>
+          <input type="email" id="email" name="email" required placeholder="tuemail@ejemplo.com"/>
+        </div>
+        <div class="form-group">
+          <label for="lugar" data-es="Nombre del punto / organización" data-en="Name of the point / organization">Nombre del punto / organización</label>
+          <input type="text" id="lugar" name="lugar" required placeholder="Ej: Parroquia San Juan · Carabanchel"/>
+        </div>
+        <div class="form-group">
+          <label for="direccion" data-es="Dirección y horario" data-en="Address and hours">Dirección y horario</label>
+          <input type="text" id="direccion" name="direccion" placeholder="Ej: C/ Ejemplo 12, 28001 Madrid · Sáb 10–18h"/>
+        </div>
+        <div class="form-group">
+          <label for="tipo" data-es="¿Qué recogen?" data-en="What do they collect?">¿Qué recogen?</label>
+          <select id="tipo" name="tipo">
+            <option data-es="Alimentos no perecederos" data-en="Non-perishable food">Alimentos no perecederos</option>
+            <option data-es="Material médico" data-en="Medical supplies">Material médico</option>
+            <option data-es="Ropa y mantas" data-en="Clothing and blankets">Ropa y mantas</option>
+            <option data-es="Material de rescate" data-en="Rescue equipment">Material de rescate</option>
+            <option data-es="Todo tipo de material" data-en="All types">Todo tipo de material</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="info" data-es="Información adicional (opcional)" data-en="Additional info (optional)">Información adicional (opcional)</label>
+          <textarea id="info" name="info" placeholder="Contacto, web, redes sociales..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-es="Enviar información" data-en="Send information">Enviar información</button>
+        <p class="form-note" data-es="Revisaremos y añadiremos el punto al mapa en menos de 24 horas." data-en="We'll review and add the point to the map within 24 hours.">Revisaremos y añadiremos el punto al mapa en menos de 24 horas.</p>
+      </form>
+    </div>
+  </div>
 </main>
 
 <footer>
-  <p data-es="Esta página no recauda donaciones. Directorio de recursos verificados mantenido por voluntarios · Datos sísmicos: USGS" data-en="This page does not collect donations. Directory of verified resources maintained by volunteers · Seismic data: USGS">Esta página no recauda donaciones. Directorio de recursos verificados mantenido por voluntarios · Datos sísmicos: USGS</p>
+  <p data-es="Esta página no recauda donaciones · Directorio de recursos verificados mantenido por voluntarios · Datos sísmicos: USGS" data-en="This page does not collect donations · Directory of verified resources maintained by volunteers · Seismic data: USGS">Esta página no recauda donaciones · Directorio de recursos verificados mantenido por voluntarios · Datos sísmicos: USGS</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  // ── LANGUAGE TOGGLE ──────────────────────────────
-  let lang = 'es';
-  function toggleLang() {
-    lang = lang === 'es' ? 'en' : 'es';
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-es]').forEach(el => {
-      el.textContent = el.getAttribute('data-' + lang);
-    });
-    document.querySelector('.lang-toggle').textContent = lang === 'es' ? '🌐 English' : '🌐 Español';
-  }
-
-  // ── USGS LIVE DATA ───────────────────────────────
-  const USGS = 'https://earthquake.usgs.gov/fdsnws/event/1/query';
-  const PARAMS = new URLSearchParams({
-    format: 'geojson',
-    starttime: '2026-06-24',
-    minmagnitude: '3.5',
-    latitude: '10.5',
-    longitude: '-68.0',
-    maxradiuskm: '350',
-    orderby: 'time',
-    limit: '50'
+// ── LANGUAGE ─────────────────────────────────────────
+let lang = 'es';
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-es]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + lang);
   });
+  document.querySelector('.lang-toggle').textContent = lang === 'es' ? '🌐 English' : '🌐 Español';
+  updateMapCount();
+}
 
-  function magColor(m) {
-    if (m >= 6.0) return 'mag-major';
-    if (m >= 5.0) return 'mag-strong';
-    if (m >= 4.0) return 'mag-moderate';
-    return 'mag-minor';
-  }
+// ── PUNTOS DE RECOGIDA ────────────────────────────────
+const POINTS = [
+  {name:'Sambil Madrid · Planta 0', lat:40.4734, lng:-3.6471, type:'general', addr:'Av. de Burgos, 67', hours:'Sáb 27 y dom 28 jun · 10:00–18:30', note:'Plataforma Apoyando a Venezuela'},
+  {name:'Refugiados Sin Fronteras · Diáspora en Movimiento', lat:40.4200, lng:-3.7100, type:'general', addr:'C/ Matilde Landa, 26', hours:'Sáb y dom · 11:00–18:00', note:''},
+  {name:'Parroquia Santa Elena · Chamberí', lat:40.4340, lng:-3.7020, type:'medical', addr:'Chamberí, Madrid', hours:'Consultar parroquia', note:'Coord. Fundación Talento 58'},
+  {name:'VENESP · Pardillo Center', lat:40.4833, lng:-3.8666, type:'general', addr:'Av. de Madrid, 4 local 1 · Villanueva del Pardillo', hours:'10:00–14:00 y 16:00–20:00', note:'También acepta aportaciones económicas'},
+  {name:'Team Manena · Madrid Centro', lat:40.4090, lng:-3.7020, type:'general', addr:'C/ Ribera de Curtidores, 34 · 28005 Madrid', hours:'09:00–18:00', note:''},
+  {name:'Respark Fusion · Parla', lat:40.2400, lng:-3.7700, type:'food', addr:'C.C. Natura · C/ Ing. Av. Torres de Quevedo, 1 · Parla', hours:'09:00–18:00', note:''},
+  {name:'Verde Desayunos · Coslada', lat:40.4227, lng:-3.5618, type:'food', addr:'C. de Uruguay, 11 · Coslada', hours:'09:00–18:00', note:''},
+  {name:'Alcalá de Henares · Bar Donde José', lat:40.4817, lng:-3.3631, type:'food', addr:'Av. Isabela Braganza 1, 28810', hours:'Consultar', note:''},
+  {name:'Alcalá de Henares · Barrio Las Sedas', lat:40.4800, lng:-3.3500, type:'general', addr:'C/ Terciopelo 6, 28806 · Contacto: Sarah 623130146', hours:'Consultar', note:''},
+  {name:'Algete', lat:40.5950, lng:-3.5033, type:'general', addr:'C/ Félix Rodríguez de la Fuente 23, 3D · 28110', hours:'Viernes desde las 17:00 · 643 093 680', note:''},
+  {name:'Arganzuela · Olé Dogo', lat:40.4050, lng:-3.7050, type:'general', addr:'Paseo de la Esperanza 49, 28005', hours:'Viernes 08:00–20:00 · Sáb 11:00–16:00', note:''},
+  {name:'Carabanchel · Metro Aluche', lat:40.3833, lng:-3.7500, type:'general', addr:'Estación Metro Aluche (cerca taquillas)', hours:'Consultar', note:''},
+  {name:'Chamberí · Taquería La Lupita', lat:40.4350, lng:-3.7000, type:'food', addr:'Zurbano 67 y Conde de Xiquena 10', hours:'Solo hoy viernes · 13:00–00:00', note:''},
+  {name:'Chamartín · Peluquería Mi Matamoros', lat:40.4650, lng:-3.6800, type:'general', addr:'Avenida Alberto Alcocer 49', hours:'Solo recogida, hasta las 22:00', note:''},
+  {name:'Chueca · Tienda Quién La Invitó', lat:40.4240, lng:-3.6980, type:'general', addr:'Calle Libertad 28 y Av. Reina Victoria 18', hours:'10:00–22:00', note:''},
+  {name:'Ciudad Lineal', lat:40.4450, lng:-3.6550, type:'general', addr:'Emilio Ferrari 102, bajo exterior izquierdo', hours:'Consultar', note:''},
+  {name:'Coslada', lat:40.4227, lng:-3.5618, type:'general', addr:'Consultar grupo WhatsApp', hours:'Consultar', note:''},
+  {name:'Fuencarral-El Pardo · Mónica Dudamel', lat:40.4900, lng:-3.7100, type:'general', addr:'Plaza de Mondariz 15, planta 12 puerta 1 · Sangenjo 25, 5D · 644626197', hours:'Consultar', note:''},
+  {name:'Getafe', lat:40.3050, lng:-3.7320, type:'general', addr:'Consultar grupo WhatsApp', hours:'Consultar', note:''},
+  {name:'Hortaleza', lat:40.4750, lng:-3.6400, type:'general', addr:'Calle Ángel Luis de la Herran 36 · 677863281', hours:'Consultar', note:''},
+  {name:'Leganés · Local Oohlala Bistró', lat:40.3283, lng:-3.7644, type:'food', addr:'Calle Berlín 46 y Calle Bureba 31 Bajo D · UPA COFFE BAR', hours:'Consultar', note:''},
+  {name:'Loeches', lat:40.3666, lng:-3.4166, type:'general', addr:'Calle Berlín 46', hours:'Sáb y dom 9:00–18:00 · 663450963', note:''},
+  {name:'Majadahonda · Luxoro', lat:40.4733, lng:-3.8716, type:'general', addr:'Gran Pza 2 (delante de La Casa del Libro)', hours:'Vie 10:00–22:00 · hasta dom 11:00–15:00', note:''},
+  {name:'Navas del Rey', lat:40.3666, lng:-4.2833, type:'general', addr:'Calle Pelayos 4B', hours:'Consultar', note:''},
+  {name:'Pinto', lat:40.2433, lng:-3.6966, type:'general', addr:'Emiliana de Zubeldia 7, bajo C · 28320', hours:'Consultar', note:''},
+  {name:'Pozuelo', lat:40.4350, lng:-3.8133, type:'general', addr:'Punto pendiente de definir', hours:'Consultar', note:''},
+  {name:'Puente de Vallecas', lat:40.3950, lng:-3.6633, type:'general', addr:'Consultar grupo WhatsApp', hours:'Consultar', note:''},
+  {name:'Rivas', lat:40.3566, lng:-3.5216, type:'general', addr:'Consultar grupo WhatsApp', hours:'Consultar', note:''},
+  {name:'Salamanca', lat:40.4283, lng:-3.6800, type:'general', addr:'Gral. Pardiñas 85 · Núñez de Balboa 35A · Calle del Cid 7 · Mq. de Zafra 7 4D · Diego de León 67 3º Izq.', hours:'Consultar', note:''},
+  {name:'San Blas-Canillejas · Estadio Metropolitano', lat:40.4366, lng:-3.5993, type:'general', addr:'Estadio Metropolitano (parking oeste)', hours:'Dom 08:00–15:00', note:''},
+  {name:'San Sebastián de los Reyes / Alcobendas · Bongo y Timbal', lat:40.5483, lng:-3.6266, type:'general', addr:'Travesía Juan Manuel Sánchez Pedagogo 2', hours:'Consultar', note:''},
+  {name:'Tetuán', lat:40.4583, lng:-3.7050, type:'general', addr:'Consultar grupo WhatsApp', hours:'Consultar', note:''},
+  {name:'Tres Cantos', lat:40.5950, lng:-3.7033, type:'general', addr:'Av. 21 de Marzo 1, Portal 6, Piso 4 · Puerta B', hours:'Consultar', note:''},
+  {name:'Usera', lat:40.3883, lng:-3.7116, type:'general', addr:'Calle Amparo Usera, Plaza José Luis H...', hours:'Consultar', note:''},
+  {name:'Vicálvaro / Moratalaz', lat:40.4066, lng:-3.6183, type:'general', addr:'Consultar grupo WhatsApp', hours:'Consultar', note:''},
+  {name:'Villa de Vallecas / Ensanche', lat:40.3766, lng:-3.6266, type:'general', addr:'Avenida del Ensanche de Vallecas 67, Sala multiusos', hours:'Consultar', note:''},
+  {name:'Villaverde', lat:40.3466, lng:-3.7016, type:'general', addr:'Calle Periana 28, 1-D', hours:'Consultar', note:''},
+  {name:'Villanueva del Pardillo · Pardillo Center', lat:40.4850, lng:-3.8750, type:'general', addr:'Av. de Madrid 4 local 1', hours:'Hoy 9:30–14:00 y 16:00–20:00 · Mañana sáb 10:00–14:00', note:''},
+  {name:'Cañaveral · Kora Balance', lat:40.3800, lng:-3.5700, type:'general', addr:'Av. de Miguel Delibes 47 · 09:30–21:30', hours:'09:30–21:30', note:''},
+];
 
-  function timeAgo(ts) {
-    const diff = Date.now() - ts;
-    const m = Math.floor(diff / 60000);
-    const h = Math.floor(m / 60);
-    const d = Math.floor(h / 24);
-    if (d > 0) return lang === 'es' ? `hace ${d}d` : `${d}d ago`;
-    if (h > 0) return lang === 'es' ? `hace ${h}h` : `${h}h ago`;
-    return lang === 'es' ? `hace ${m}m` : `${m}m ago`;
-  }
+const colorMap = {food:'#1E7A4A', medical:'#B22222', general:'#1A4A8A'};
+let allMarkers = [];
+let leafletMap;
 
-  function renderQuakes(features) {
-    const total = features.length;
-    const m5 = features.filter(f => f.properties.mag >= 5.0).length;
-    const maxMag = Math.max(...features.map(f => f.properties.mag)).toFixed(1);
-    const latest = features[0];
-    const lastTime = latest ? timeAgo(latest.properties.time) : '—';
+function initMap() {
+  leafletMap = L.map('map').setView([40.42, -3.70], 10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'© <a href="https://openstreetmap.org">OpenStreetMap</a>',
+    maxZoom:18
+  }).addTo(leafletMap);
 
-    ['stat-total','stat-m5','stat-max','stat-last'].forEach(id => {
-      document.getElementById(id).classList.remove('loading');
+  POINTS.forEach(p => {
+    const color = colorMap[p.type] || '#1A4A8A';
+    const icon = L.divIcon({
+      className:'',
+      html:`<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4)"></div>`,
+      iconSize:[14,14], iconAnchor:[7,7]
     });
-    document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-m5').textContent = m5;
-    document.getElementById('stat-max').textContent = maxMag;
-    document.getElementById('stat-last').textContent = lastTime;
+    const marker = L.marker([p.lat, p.lng], {icon}).addTo(leafletMap);
+    marker.bindPopup(`<strong>${p.name}</strong><br>📍 ${p.addr}<br>🕐 ${p.hours}${p.note ? '<br><em>'+p.note+'</em>' : ''}`);
+    marker._type = p.type;
+    allMarkers.push(marker);
+  });
+  updateMapCount();
+}
 
-    const list = document.getElementById('quake-list');
-    const recent = features.slice(0, 6);
-    list.innerHTML = recent.map(f => {
-      const mag = f.properties.mag.toFixed(1);
-      const place = f.properties.place || '—';
-      const ago = timeAgo(f.properties.time);
-      const cls = magColor(f.properties.mag);
-      return `<div class="quake-item">
-        <span class="quake-mag ${cls}">M${mag}</span>
-        <span class="quake-place">${place}</span>
-        <span class="quake-time">${ago}</span>
-      </div>`;
-    }).join('');
-
-    document.querySelector('.live-pill').innerHTML =
-      `<span class="live-dot"></span><span>${lang === 'es' ? 'En vivo · USGS' : 'Live · USGS'}</span>`;
-  }
-
-  function showError() {
-    document.getElementById('quake-list').innerHTML =
-      `<p class="quake-error" data-es="No se pudo conectar con USGS. Intenta recargar la página." data-en="Could not connect to USGS. Try reloading the page.">${lang === 'es' ? 'No se pudo conectar con USGS. Intenta recargar la página.' : 'Could not connect to USGS. Try reloading the page.'}</p>`;
-    document.querySelector('.live-pill span:last-child').textContent = lang === 'es' ? 'Sin conexión' : 'Offline';
-  }
-
-  async function fetchQuakes() {
-    try {
-      const res = await fetch(`${USGS}?${PARAMS}`);
-      if (!res.ok) throw new Error('USGS error');
-      const data = await res.json();
-      renderQuakes(data.features);
-    } catch {
-      showError();
+function filterMap(type) {
+  document.querySelectorAll('.map-filter').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.map-filter.${type}`).classList.add('active');
+  allMarkers.forEach(m => {
+    if (type === 'all' || m._type === type) {
+      if (!leafletMap.hasLayer(m)) leafletMap.addLayer(m);
+    } else {
+      if (leafletMap.hasLayer(m)) leafletMap.removeLayer(m);
     }
-  }
+  });
+  updateMapCount();
+}
 
-  fetchQuakes();
-  setInterval(fetchQuakes, 120000); // cada 2 minutos
+function updateMapCount() {
+  const visible = allMarkers.filter(m => leafletMap && leafletMap.hasLayer(m)).length;
+  const el = document.getElementById('map-count');
+  if (el) el.textContent = lang === 'es'
+    ? `${visible} puntos de recogida activos en la Comunidad de Madrid`
+    : `${visible} active collection points in the Community of Madrid`;
+}
+
+// ── COPY IBAN ─────────────────────────────────────────
+function copyIBAN(btn, iban) {
+  navigator.clipboard.writeText(iban).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+// ── USGS LIVE DATA ────────────────────────────────────
+const USGS = 'https://earthquake.usgs.gov/fdsnws/event/1/query';
+const PARAMS = new URLSearchParams({
+  format:'geojson', starttime:'2026-06-24', minmagnitude:'3.5',
+  latitude:'10.5', longitude:'-68.0', maxradiuskm:'350', orderby:'time', limit:'50'
+});
+
+function magColor(m) {
+  if (m>=6.0) return 'mag-major';
+  if (m>=5.0) return 'mag-strong';
+  if (m>=4.0) return 'mag-moderate';
+  return 'mag-minor';
+}
+
+function timeAgo(ts) {
+  const diff = Date.now()-ts, m=Math.floor(diff/60000), h=Math.floor(m/60), d=Math.floor(h/24);
+  if (d>0) return lang==='es'?`hace ${d}d`:`${d}d ago`;
+  if (h>0) return lang==='es'?`hace ${h}h`:`${h}h ago`;
+  return lang==='es'?`hace ${m}m`:`${m}m ago`;
+}
+
+function renderQuakes(features) {
+  ['stat-total','stat-m5','stat-max','stat-last'].forEach(id=>document.getElementById(id).classList.remove('loading'));
+  document.getElementById('stat-total').textContent = features.length;
+  document.getElementById('stat-m5').textContent = features.filter(f=>f.properties.mag>=5.0).length;
+  document.getElementById('stat-max').textContent = Math.max(...features.map(f=>f.properties.mag)).toFixed(1);
+  document.getElementById('stat-last').textContent = features[0] ? timeAgo(features[0].properties.time) : '—';
+  document.getElementById('quake-list').innerHTML = features.slice(0,6).map(f=>`
+    <div class="quake-item">
+      <span class="quake-mag ${magColor(f.properties.mag)}">M${f.properties.mag.toFixed(1)}</span>
+      <span class="quake-place">${f.properties.place||'—'}</span>
+      <span class="quake-time">${timeAgo(f.properties.time)}</span>
+    </div>`).join('');
+  document.querySelector('.live-pill').innerHTML=`<span class="live-dot"></span><span>${lang==='es'?'En vivo · USGS':'Live · USGS'}</span>`;
+}
+
+function showError() {
+  document.getElementById('quake-list').innerHTML=`<p class="quake-error">${lang==='es'?'No se pudo conectar con USGS. Intenta recargar.':'Could not connect to USGS. Try reloading.'}</p>`;
+}
+
+async function fetchQuakes() {
+  try {
+    const res = await fetch(`${USGS}?${PARAMS}`);
+    if (!res.ok) throw new Error();
+    renderQuakes((await res.json()).features);
+  } catch { showError(); }
+}
+
+// ── INIT ──────────────────────────────────────────────
+window.addEventListener('load', () => { initMap(); fetchQuakes(); });
+setInterval(fetchQuakes, 120000);
 </script>
 </body>
 </html>
