@@ -4,9 +4,8 @@ Directorio bilingüe (ES/EN) de recursos verificados para venezolanos en el exte
 
 ---
 
-## 🌐 Web · Despliegue en 2 minutos
-
-**Netlify Drop (más fácil):**
+## 🌐 Web · Despliegue 
+**Netlify Drop:**
 1. Ve a https://app.netlify.com/drop
 2. Arrastra el archivo `index.html`
 3. Listo — URL pública instantánea
