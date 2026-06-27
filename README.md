@@ -1,58 +1,72 @@
-# Venezuela Resiste
+# Venezuela Resiste 🇻🇪
 
-Directorio bilingüe (ES/EN) de recursos verificados para venezolanos en el exterior tras el terremoto del 24 de junio de 2026. Incluye datos sísmicos en tiempo real desde USGS y un bot de Telegram para alertas de réplicas.
+Directorio bilingüe (ES/EN) de recursos verificados para ayudar a Venezuela desde Madrid tras el terremoto del 24 de junio de 2026.
 
----
-
-## 🌐 Web · Despliegue 
-**Netlify Drop:**
-1. Ve a https://app.netlify.com/drop
-2. Arrastra el archivo `index.html`
-3. Listo — URL pública instantánea
-
-**GitHub Pages:**
-1. Crea un repo, sube `index.html` como `index.html`
-2. Settings → Pages → Branch: main → / (root)
-3. URL: `https://tuusuario.github.io/nombre-repo`
-
-La web consulta USGS automáticamente cada 2 minutos desde el navegador del visitante. Sin servidor, sin base de datos.
+🌐 **[venezuelaresiste.netlify.app](https://venezuelaresiste.netlify.app)**
+📢 **Canal de alertas: [t.me/VenezuelaAvisos](https://t.me/VenezuelaAvisos)**
 
 ---
 
-## 🤖 Bot de Telegram · Despliegue
+## Qué incluye
 
-### 1. Crear el bot
-1. Habla con @BotFather en Telegram → `/newbot`
-2. Guarda el **token** que te da
+- 🗺️ Mapa interactivo con +38 puntos de recogida en la Comunidad de Madrid
+- 🔎 Plataformas verificadas para buscar personas desaparecidas
+- 💳 Bizum y transferencias bancarias verificadas (Cruz Roja, WCK, Meals4Hope, Save the Children, Cáritas)
+- 💚 Directorio de ONGs con canales de donación seguros
+- 📡 Datos sísmicos en tiempo real vía USGS API
+- 🤖 Bot de Telegram con alertas automáticas de réplicas
+- 📬 Formulario para reportar nuevos puntos de recogida
+- 🛡️ Guía anti-estafas
 
-### 2. Crear canal y obtener el Chat ID
-1. Crea un canal público en Telegram (ej: @VenezuelaReplicas)
-2. Añade tu bot como administrador
-3. Envía un mensaje al canal
-4. Ve a: `https://api.telegram.org/bot<TOKEN>/getUpdates`
-5. Busca el campo `"id"` dentro de `"chat"` — ese es tu CHAT_ID
+---
 
-### 3. Desplegar en Railway (gratis)
-1. Ve a https://railway.app → New Project → Deploy from GitHub
-2. Sube la carpeta `bot/` o conecta tu repo
-3. En Variables de entorno añade:
-   - `TELEGRAM_TOKEN` = tu token
-   - `TELEGRAM_CHAT`  = tu chat ID (ej: -1001234567890)
-   - `MIN_MAG`        = 4.5 (opcional, es el default)
-4. Railway detecta `railway.json` y arranca automáticamente
+## Estructura
 
-### Variables de entorno
+```
+index.html          → Web completa (un solo archivo, sin dependencias)
+bot/
+  bot.py            → Bot de Telegram · alertas de réplicas vía USGS
+  requirements.txt
+  railway.json      → Config de despliegue en Railway
+  .env.example      → Variables de entorno necesarias
+```
+
+---
+
+## Despliegue
+
+### Web → Netlify
+
+1. Conecta este repositorio en [netlify.com](https://netlify.com)
+2. Branch: `main` · Publish directory: `.`
+3. Cada `git push` actualiza la web automáticamente
+
+### Bot → Railway
+
+1. Ve a [railway.app](https://railway.app) → New Project → Deploy from GitHub
+2. Root Directory: `bot`
+3. Añade las variables de entorno:
+
 | Variable | Descripción | Ejemplo |
 |---|---|---|
-| `TELEGRAM_TOKEN` | Token del bot de @BotFather | `123456:ABC-DEF...` |
-| `TELEGRAM_CHAT` | ID del canal o grupo | `-1001234567890` |
-| `MIN_MAG` | Magnitud mínima para avisar | `4.5` |
+| `TELEGRAM_TOKEN` | Token del bot (de @BotFather) | `123456:ABC...` |
+| `TELEGRAM_CHAT` | ID del canal | `-1004427169066` |
+| `MIN_MAG` | Magnitud mínima para alertar | `4.5` |
 
 ---
 
-## 📡 Fuente de datos
+## Contribuir
 
-Todos los datos sísmicos provienen de la **API pública del USGS**:
-`https://earthquake.usgs.gov/fdsnws/event/1/`
+¿Conoces un punto de recogida que no está en el mapa? Usa el formulario en la web o abre un Issue en este repositorio.
 
-Radio de búsqueda: 350 km desde 10.5°N, 68.0°W (centro de Venezuela).
+---
+
+## Fuentes de datos
+
+- Actividad sísmica: [USGS Earthquake Hazards Program](https://earthquake.usgs.gov/fdsnws/event/1/)
+- Puntos de recogida: comunidad, medios locales y verificación manual
+- Organizaciones: Cruz Roja, MSF, UNICEF, GlobalGiving, WCK, Aldeas Infantiles, We Love Foundation
+
+---
+
+*Esta web no recauda donaciones. Es un directorio de recursos verificados mantenido por voluntarios.*
