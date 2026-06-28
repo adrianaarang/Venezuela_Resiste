@@ -121,6 +121,31 @@
   .form-submit:hover{background:#253660}
   .form-note{font-size:.75rem;color:var(--muted);margin-top:10px;text-align:center}
 
+
+  /* SHARE BUTTONS */
+  .share-bar{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;text-align:center}
+  .share-title{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:14px}
+  .share-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+  .share-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:20px;font-size:.82rem;font-weight:700;text-decoration:none;color:white;transition:opacity .15s}
+  .share-btn:hover{opacity:.85}
+  .share-wa{background:#25D366}.share-tw{background:#1DA1F2}.share-fb{background:#1877F2}
+  .share-li{background:#0A66C2}.share-tg{background:#229ED9}.share-cp{background:var(--navy);cursor:pointer;border:none;font-family:inherit}
+
+  /* DONAR CARDS */
+  .dona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .dona-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px}
+  .dona-avatar{width:36px;height:36px;border-radius:8px;background:var(--navy);color:var(--white);font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .dona-header{display:flex;align-items:center;gap:10px}
+  .dona-name{font-size:.95rem;font-weight:700;color:var(--navy)}
+  .dona-desc{font-size:.82rem;color:var(--muted);line-height:1.5;flex:1}
+  .dona-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .dona-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;font-size:.78rem;font-weight:700;text-decoration:none;background:var(--navy);color:white;transition:opacity .15s}
+  .dona-btn:hover{opacity:.85}
+  .dona-btn.secondary{background:var(--off);color:var(--navy);border:1px solid var(--border)}
+  .zelle-row{background:#F0F7FF;border:1px solid #C5DCF5;border-radius:6px;padding:8px 12px;font-size:.78rem;color:#1A4A8A}
+  .zelle-email{font-weight:700;font-family:monospace;margin:2px 0}
+  .zelle-copy{background:none;border:1px solid #1A4A8A;border-radius:4px;padding:2px 7px;font-size:.7rem;cursor:pointer;color:#1A4A8A;margin-left:6px}
+
   footer{text-align:center;padding:28px 20px;font-size:.77rem;color:var(--muted);border-top:1px solid var(--border);max-width:var(--max);margin:0 auto}
   footer a{color:var(--muted)}
 
@@ -260,47 +285,144 @@
     </div>
   </div>
 
-  <!-- DONAR -->
+  <!-- DONAR GLOBAL -->
   <div class="section">
     <p class="section-label" data-es="Paso 2" data-en="Step 2">Paso 2</p>
-    <h2 class="section-title" data-es="💚 Donar de forma segura" data-en="💚 Donate safely">💚 Donar de forma segura</h2>
-    <div class="cards">
-      <a class="card" href="https://www.globalgiving.org/projects/venezuela-earthquake-relief/" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">GlobalGiving · Venezuela Relief</span>
-        <span class="card-desc" data-es="Canaliza donaciones a organizaciones locales verificadas: agua, alimentos, refugio y atención médica." data-en="Channels donations to verified local organizations: water, food, shelter, and medical care.">Canaliza donaciones a organizaciones locales verificadas: agua, alimentos, refugio y atención médica.</span>
-        <span class="card-url">globalgiving.org</span>
-      </a>
-      <a class="card" href="https://www.msf.org/venezuela" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">Médicos Sin Fronteras</span>
-        <span class="card-desc" data-es="Coordinación médica activa en Venezuela desde el primer día." data-en="Active medical coordination in Venezuela from day one.">Coordinación médica activa en Venezuela desde el primer día.</span>
-        <span class="card-url">msf.org/venezuela</span>
-      </a>
-      <a class="card" href="https://www.unicef.es" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">UNICEF España</span>
-        <span class="card-desc" data-es="Protección y atención urgente a niños y familias afectadas." data-en="Urgent protection and care for affected children and families.">Protección y atención urgente a niños y familias afectadas.</span>
-        <span class="card-url">unicef.es</span>
-      </a>
-      <a class="card" href="https://wck.org/relief/venezuela" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">World Central Kitchen</span>
-        <span class="card-desc" data-es="Distribución de comidas en emergencias. Respuesta rápida en catástrofes." data-en="Meal distribution in emergencies. Fast disaster response.">Distribución de comidas en emergencias. Respuesta rápida en catástrofes.</span>
-        <span class="card-url">wck.org</span>
-      </a>
-      <a class="card" href="https://aldeasinfantiles.es" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">Aldeas Infantiles SOS</span>
-        <span class="card-desc" data-es="Apoyo integral a la infancia y familias en situación de vulnerabilidad." data-en="Comprehensive support for children and vulnerable families.">Apoyo integral a la infancia y familias en situación de vulnerabilidad.</span>
-        <span class="card-url">aldeasinfantiles.es</span>
-      </a>
-      <a class="card" href="https://welove.foundation" target="_blank" rel="noopener">
-        <span class="card-arrow">↗</span><span class="card-badge badge-v" data-es="✓ Verificado" data-en="✓ Verified">✓ Verified</span>
-        <span class="card-title">We Love Foundation</span>
-        <span class="card-desc" data-es="Fundación sin ánimo de lucro que canaliza recursos a causas humanitarias en Venezuela." data-en="Non-profit foundation channeling resources to humanitarian causes in Venezuela.">Fundación sin ánimo de lucro que canaliza recursos a causas humanitarias en Venezuela.</span>
-        <span class="card-url">welove.foundation</span>
-      </a>
+    <h2 class="section-title" data-es="💚 Donar de forma segura — organizaciones verificadas" data-en="💚 Donate safely — verified organizations">💚 Donar de forma segura — organizaciones verificadas</h2>
+    <div class="dona-grid">
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">CV</div><span class="dona-name">Cáritas de Venezuela</span></div>
+        <p class="dona-desc" data-es="Org. humanitaria de la Iglesia Católica con +30.000 voluntarios. Lleva alimentación, salud y agua potable a los damnificados." data-en="Catholic humanitarian org with 30,000+ volunteers. Delivers food, health, and water to those affected.">Org. humanitaria de la Iglesia Católica con +30.000 voluntarios. Lleva alimentación, salud y agua potable a los damnificados.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://caritasvenezuela.org/donaciones/" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">FC</div><span class="dona-name">Fundación Chamos</span></div>
+        <p class="dona-desc" data-es="Enfocada en niñez y familias vulnerables. Campaña de emergencia para respuesta inmediata y reconstrucción." data-en="Focused on children and vulnerable families. Emergency campaign for immediate response and reconstruction.">Enfocada en niñez y familias vulnerables. Campaña de emergencia para respuesta inmediata y reconstrucción.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://donorbox.org/emergencia-terremoto-venezuela" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">AS</div><span class="dona-name">Alimenta la Solidaridad</span></div>
+        <p class="dona-desc" data-es="Red de comedores comunitarios para la niñez. Sede de donaciones en EE.UU., lleva alimentación a familias afectadas." data-en="Community canteen network for children. US-based donations reaching affected families.">Red de comedores comunitarios para la niñez. Sede de donaciones en EE.UU., lleva alimentación a familias afectadas.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://donate.alimentalasolidaridad.org/campaign/815565/donate" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">M4H</div><span class="dona-name">Meals4Hope</span></div>
+        <p class="dona-desc" data-es="Moviliza alimentos, agua, medicamentos y refugio para familias venezolanas. Bizum 11976 desde España." data-en="Mobilizes food, water, medication and shelter for Venezuelan families. Bizum 11976 from Spain.">Moviliza alimentos, agua, medicamentos y refugio para familias venezolanas. Bizum 11976 desde España.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://sosterremoto.meals4hope.org" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">FI</div><span class="dona-name">Fundación Impronta</span></div>
+        <p class="dona-desc" data-es="Lleva techo, agua y alimentos a familias que se quedaron sin lo esencial. Acepta Zelle." data-en="Delivers shelter, water and food to families who lost everything. Accepts Zelle.">Lleva techo, agua y alimentos a familias que se quedaron sin lo esencial. Acepta Zelle.</p>
+        <div class="zelle-row">💸 Zelle · <span class="zelle-email">donacionesimpronta@gmail.com</span><button class="zelle-copy" onclick="copyIBAN(this,'donacionesimpronta@gmail.com')">Copiar</button><br><span style="font-size:.72rem;color:#555">A nombre de: Fundación Impronta</span></div>
+        <div class="dona-actions"><a class="dona-btn" href="https://donorbox.org/fundacion_impronta" target="_blank" rel="noopener" data-es="Donar web →" data-en="Donate web →">Donar web →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">GEM</div><span class="dona-name">Global Empowerment Mission</span></div>
+        <p class="dona-desc" data-es="Respuesta rápida ante desastres. Activó Misión Venezuela 2026 con logística, suministros y ayuda inmediata." data-en="Rapid disaster response. Activated Venezuela Mission 2026 with logistics, supplies, and immediate aid.">Respuesta rápida ante desastres. Activó Misión Venezuela 2026 con logística, suministros y ayuda inmediata.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://www.globalempowermentmission.org/es/mission/venezuela-earthquakes/" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">USB</div><span class="dona-name">AlumnUSB</span></div>
+        <p class="dona-desc" data-es="Red global de egresados de la USB. Canaliza ayuda a equipos de rescate con atención especial a La Guaira. Acepta Zelle." data-en="Global USB alumni network. Channels aid to rescue teams with special focus on La Guaira. Accepts Zelle.">Red global de egresados de la USB. Canaliza ayuda a equipos de rescate con atención especial a La Guaira. Acepta Zelle.</p>
+        <div class="zelle-row">💸 Zelle · <span class="zelle-email">Contact@alumnusb.org</span><button class="zelle-copy" onclick="copyIBAN(this,'Contact@alumnusb.org')">Copiar</button><br><span style="font-size:.72rem;color:#555">A nombre de: Universidad Simón Bolívar Alumni Association</span></div>
+        <div class="dona-actions"><a class="dona-btn" href="https://alumnusb.org/ayuda-tras-terremoto/" target="_blank" rel="noopener" data-es="Donar web →" data-en="Donate web →">Donar web →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">Y</div><span class="dona-name">Yummy</span></div>
+        <p class="dona-desc" data-es="Súper-app venezolana que usa su red logística para llevar alimentos y suministros a las zonas más afectadas." data-en="Venezuelan super-app using its logistics network to deliver food and supplies to the most affected areas.">Súper-app venezolana que usa su red logística para llevar alimentos y suministros a las zonas más afectadas.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://dona.yummyrides.com" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">VACC</div><span class="dona-name">VACC Foundation</span></div>
+        <p class="dona-desc" data-es="Cámara de Comercio Venezolano-Americana (Miami). Coordina donaciones desde EE.UU. y canaliza ayuda a las víctimas." data-en="Venezuelan-American Chamber of Commerce (Miami). Coordinates US donations and channels aid to victims.">Cámara de Comercio Venezolano-Americana (Miami). Coordina donaciones desde EE.UU. y canaliza ayuda a las víctimas.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://donate.stripe.com/eVq14m62u9BRdpm4Xw2sM02?brid=YWdncwH8gi9Ff7k3ioH1xBycZASj" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">WCK</div><span class="dona-name">World Central Kitchen</span></div>
+        <p class="dona-desc" data-es="Chef José Andrés. Cocinas móviles y aliados locales para alimentar a familias que lo perdieron todo. Bizum 03843." data-en="Chef José Andrés. Mobile kitchens and local partners feeding families who lost everything. Bizum 03843.">Chef José Andrés. Cocinas móviles y aliados locales para alimentar a familias que lo perdieron todo. Bizum 03843.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://donate.wck.org/campaign/815521/donate?c_src=site-slider-rlf183" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">PH</div><span class="dona-name">Project HOPE</span></div>
+        <p class="dona-desc" data-es="Atención médica de emergencia y apoyo sanitario junto a equipos de salud locales en las zonas afectadas." data-en="Emergency medical care and health support alongside local health teams in affected areas.">Atención médica de emergencia y apoyo sanitario junto a equipos de salud locales en las zonas afectadas.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://give.projecthope.org/page/FY26_Venezuela_Web" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">SR</div><span class="dona-name">Sun.Risas</span></div>
+        <p class="dona-desc" data-es="Trabaja con aliados locales para llevar auxilio inmediato a personas y comunidades damnificadas." data-en="Works with local partners to deliver immediate aid to affected people and communities.">Trabaja con aliados locales para llevar auxilio inmediato a personas y comunidades damnificadas.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://fundraise.sunrisas.org/campaign/815513/donate" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">WL</div><span class="dona-name">We Love Foundation</span></div>
+        <p class="dona-desc" data-es="Distribuye alimentos, agua potable, kits de higiene y suministros esenciales a familias afectadas." data-en="Distributes food, drinking water, hygiene kits and essential supplies to affected families.">Distribuye alimentos, agua potable, kits de higiene y suministros esenciales a familias afectadas.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://gofund.me/db2e65b4a" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">MSF</div><span class="dona-name">Médicos Sin Fronteras</span></div>
+        <p class="dona-desc" data-es="Coordinación médica activa en Venezuela desde el primer día del terremoto." data-en="Active medical coordination in Venezuela from the first day of the earthquake.">Coordinación médica activa en Venezuela desde el primer día del terremoto.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://www.msf.org/venezuela" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">🦄</div><span class="dona-name">UNICEF España</span></div>
+        <p class="dona-desc" data-es="Protección y atención urgente a niños y familias afectadas por el terremoto." data-en="Urgent protection and care for children and families affected by the earthquake.">Protección y atención urgente a niños y familias afectadas por el terremoto.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://www.unicef.es" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+      <div class="dona-card">
+        <div class="dona-header"><div class="dona-avatar">AI</div><span class="dona-name">Aldeas Infantiles SOS</span></div>
+        <p class="dona-desc" data-es="Apoyo integral a la infancia y familias en situación de vulnerabilidad." data-en="Comprehensive support for children and vulnerable families.">Apoyo integral a la infancia y familias en situación de vulnerabilidad.</p>
+        <div class="dona-actions"><a class="dona-btn" href="https://aldeasinfantiles.es" target="_blank" rel="noopener" data-es="Donar →" data-en="Donate →">Donar →</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPARTIR -->
+  <div class="section">
+    <p class="section-label" data-es="Difunde" data-en="Spread the word">Difunde</p>
+    <h2 class="section-title" data-es="📣 Comparte esta página" data-en="📣 Share this page">📣 Comparte esta página</h2>
+    <div class="share-bar">
+      <p class="share-title" data-es="Cuantas más personas la vean, más ayuda llega a Venezuela" data-en="The more people see this, the more help reaches Venezuela">Cuantas más personas la vean, más ayuda llega a Venezuela</p>
+      <div class="share-buttons">
+        <a class="share-btn share-wa" href="https://api.whatsapp.com/send?text=Recursos%20verificados%20para%20ayudar%20a%20Venezuela%20desde%20Madrid%20%F0%9F%87%BB%F0%9F%87%AA%20https%3A%2F%2Fvenezuelaresiste.netlify.app" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a class="share-btn share-tg" href="https://t.me/share/url?url=https%3A%2F%2Fvenezuelaresiste.netlify.app&text=Recursos%20verificados%20para%20ayudar%20a%20Venezuela%20desde%20Madrid" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+          Telegram
+        </a>
+        <a class="share-btn share-tw" href="https://twitter.com/intent/tweet?text=Recursos%20verificados%20para%20ayudar%20a%20%23Venezuela%20desde%20Madrid%20%F0%9F%87%BB%F0%9F%87%AA&url=https%3A%2F%2Fvenezuelaresiste.netlify.app" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </a>
+        <a class="share-btn share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvenezuelaresiste.netlify.app" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a class="share-btn share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fvenezuelaresiste.netlify.app" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <button class="share-btn share-cp" onclick="copyLink(this)">
+          🔗 <span data-es="Copiar enlace" data-en="Copy link">Copiar enlace</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -329,11 +451,11 @@
         <p style="display:none"><input name="bot-field"/></p>
         <div class="form-group">
           <label for="nombre" data-es="Tu nombre" data-en="Your name">Tu nombre</label>
-          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"/>
+          <input type="text" id="nombre" name="nombre" required placeholder="Adriana García"/>
         </div>
         <div class="form-group">
           <label for="email" data-es="Tu email" data-en="Your email">Tu email</label>
-          <input type="email" id="email" name="email" required placeholder="tuemail@ejemplo.com"/>
+          <input type="email" id="email" name="email" required placeholder="adriana@ejemplo.com"/>
         </div>
         <div class="form-group">
           <label for="lugar" data-es="Nombre del punto / organización" data-en="Name of the point / organization">Nombre del punto / organización</label>
@@ -527,6 +649,16 @@ async function fetchQuakes() {
     if (!res.ok) throw new Error();
     renderQuakes((await res.json()).features);
   } catch { showError(); }
+}
+
+// ── COPY LINK ─────────────────────────────────────────
+function copyLink(btn) {
+  navigator.clipboard.writeText('https://venezuelaresiste.netlify.app').then(() => {
+    const span = btn.querySelector('span');
+    const orig = span.textContent;
+    span.textContent = '✓ Copiado';
+    setTimeout(() => span.textContent = orig, 1800);
+  });
 }
 
 // ── INIT ──────────────────────────────────────────────
